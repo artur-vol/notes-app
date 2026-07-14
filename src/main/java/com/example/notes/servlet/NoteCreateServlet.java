@@ -21,7 +21,12 @@ public class NoteCreateServlet extends HttpServlet {
                          HttpServletResponse response)
             throws ServletException, IOException {
 
-        request.setAttribute("formAction", request.getContextPath() + "/notes/create");
+        request.setAttribute("title", "");
+        request.setAttribute("content", "");
+        request.setAttribute(
+                "formAction",
+                request.getContextPath() + "/notes/create"
+        );
         request.setAttribute("pageTitle", "Create note");
 
         request.getRequestDispatcher("/WEB-INF/views/note-form.jsp")
@@ -40,9 +45,12 @@ public class NoteCreateServlet extends HttpServlet {
 
         if (title == null || title.isBlank()) {
             request.setAttribute("error", "Title cannot be blank");
-            request.setAttribute("title", title);
-            request.setAttribute("content", content);
-            request.setAttribute("formAction", request.getContextPath() + "/notes/create");
+            request.setAttribute("title", title == null ? "" : title);
+            request.setAttribute("content", content == null ? "" : content);
+            request.setAttribute(
+                    "formAction",
+                    request.getContextPath() + "/notes/create"
+            );
             request.setAttribute("pageTitle", "Create note");
 
             request.getRequestDispatcher("/WEB-INF/views/note-form.jsp")

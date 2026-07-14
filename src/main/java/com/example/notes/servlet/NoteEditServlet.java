@@ -26,7 +26,10 @@ public class NoteEditServlet extends HttpServlet {
         try {
             id = Integer.parseInt(request.getParameter("id"));
         } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid note ID");
+            response.sendError(
+                    HttpServletResponse.SC_BAD_REQUEST,
+                    "Invalid note ID"
+            );
             return;
         }
 
@@ -34,12 +37,20 @@ public class NoteEditServlet extends HttpServlet {
             Note note = noteDao.findById(id);
 
             if (note == null) {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Note not found");
+                response.sendError(
+                        HttpServletResponse.SC_NOT_FOUND,
+                        "Note not found"
+                );
                 return;
             }
 
             request.setAttribute("note", note);
-            request.setAttribute("formAction", request.getContextPath() + "/notes/update");
+            request.setAttribute("title", note.getTitle());
+            request.setAttribute("content", note.getContent());
+            request.setAttribute(
+                    "formAction",
+                    request.getContextPath() + "/notes/update"
+            );
             request.setAttribute("pageTitle", "Edit note");
 
             request.getRequestDispatcher("/WEB-INF/views/note-form.jsp")
@@ -62,7 +73,10 @@ public class NoteEditServlet extends HttpServlet {
         try {
             id = Integer.parseInt(request.getParameter("id"));
         } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid note ID");
+            response.sendError(
+                    HttpServletResponse.SC_BAD_REQUEST,
+                    "Invalid note ID"
+            );
             return;
         }
 
@@ -72,12 +86,15 @@ public class NoteEditServlet extends HttpServlet {
         if (title == null || title.isBlank()) {
             Note note = new Note();
             note.setId(id);
-            note.setTitle(title);
-            note.setContent(content);
 
             request.setAttribute("note", note);
+            request.setAttribute("title", title == null ? "" : title);
+            request.setAttribute("content", content == null ? "" : content);
             request.setAttribute("error", "Title cannot be blank");
-            request.setAttribute("formAction", request.getContextPath() + "/notes/update");
+            request.setAttribute(
+                    "formAction",
+                    request.getContextPath() + "/notes/update"
+            );
             request.setAttribute("pageTitle", "Edit note");
 
             request.getRequestDispatcher("/WEB-INF/views/note-form.jsp")

@@ -78,14 +78,14 @@
         type="text"
         required
         maxlength="200"
-        value="<c:out value='${not empty note ? note.title : title}' />">
+        value="<c:out value='${title}' />">
 
     <label for="content">Content</label>
 
     <textarea
         id="content"
         name="content"
-        maxlength="4000"><c:out value="${not empty note ? note.content : content}" /></textarea>
+        maxlength="4000"><c:out value="${content}" /></textarea>
 
     <div class="actions">
         <button type="submit">Save</button>
