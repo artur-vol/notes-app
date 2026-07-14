@@ -10,6 +10,16 @@ public final class DatabaseConfig {
     private static final String DB_USER = System.getenv("DB_USER");
     private static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
 
+    static {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (ClassNotFoundException e) {
+            throw new ExceptionInInitializerError(
+                    "Microsoft SQL Server JDBC driver was not found"
+            );
+        }
+    }
+
     private DatabaseConfig() {
     }
 
