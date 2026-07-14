@@ -1,0 +1,23 @@
+# Maven build output
+target/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment files and secrets
+.env
+*.env
+/etc/notes-app.env
+
+# Temporary files
+*.tmp
+*.swp
